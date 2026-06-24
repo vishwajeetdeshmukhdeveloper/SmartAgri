@@ -1,0 +1,19 @@
+name: smartagri
+description: A smart agriculture app
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  image_picker: ^1.0.7
+  tflite_v2: ^1.0.0
+  image: ^4.1.7
+  flutter_tts: ^3.8.5
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/
+    - assets/images/

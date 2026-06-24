@@ -1,0 +1,15 @@
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- Existing content... -->
+    
+    <!-- ADD THESE LINES HERE -->
+    <key>NSCameraUsageDescription</key>
+    <string>Camera access is required to scan crop diseases</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Gallery access is needed to select crop images</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Microphone access for voice features</string>
+    
+</dict>
+</plist>
