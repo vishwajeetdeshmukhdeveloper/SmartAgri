@@ -20,6 +20,24 @@ Made in India 🇮🇳
 
 ---
 
+## 📸 Screenshots
+
+<p align="center">
+  <img src="assets/screenshots/splash_screen.png" width="200" alt="Splash Screen"/>
+  &nbsp;&nbsp;
+  <img src="assets/screenshots/scanner_screen.png" width="200" alt="Scanner Screen"/>
+  &nbsp;&nbsp;
+  <img src="assets/screenshots/result_screen.png" width="200" alt="Result Screen"/>
+  &nbsp;&nbsp;
+  <img src="assets/screenshots/invalid_image_screen.png" width="200" alt="Invalid Image Screen"/>
+</p>
+
+| Splash Screen | Scanner Screen | Result Screen | Invalid Image |
+|:---:|:---:|:---:|:---:|
+| App launch branding | Capture or upload leaf | Disease diagnosis | Error handling |
+
+---
+
 ## 🦠 Supported Diseases
 
 | Crop | Disease |
