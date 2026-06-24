@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tflite_v2/tflite_v2.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import 'dart:io';
+import 'dart:io' if (dart.library.html) 'dart:html';
 
 void main() {
   runApp(const SmartAgriApp());
@@ -119,6 +120,11 @@ class _ScannerScreenState extends State<ScannerScreen> {
   }
 
   Future<void> _loadModel() async {
+    if (kIsWeb) {
+      // TFLite is not supported on web
+      print('Running on web - TFLite model not available');
+      return;
+    }
     try {
       String? res = await Tflite.loadModel(
         model: "assets/crop_disease_model.tflite",
@@ -167,6 +173,11 @@ class _ScannerScreenState extends State<ScannerScreen> {
   }
 
   Future<void> _classifyImage() async {
+    if (kIsWeb) {
+      _showWebDemoDialog();
+      return;
+    }
+
     if (_selectedImage == null) {
       _showSnackBar('Please select an image first', isError: true);
       return;
@@ -332,6 +343,63 @@ class _ScannerScreenState extends State<ScannerScreen> {
       'treatment':
           'Consult local agricultural extension services for appropriate treatment recommendations.',
     };
+  }
+
+  void _showWebDemoDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        title: Row(
+          children: [
+            Icon(Icons.info_outline, color: Color(0xFF5B4FFF)),
+            SizedBox(width: 8),
+            Text('Web Demo'),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'This is a UI demo of SmartAgri.',
+              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+            ),
+            SizedBox(height: 12),
+            Text(
+              'The AI-powered crop disease detection requires the TensorFlow Lite engine which only runs on mobile devices.',
+              style: TextStyle(color: Colors.grey[700], height: 1.5),
+            ),
+            SizedBox(height: 16),
+            Container(
+              padding: EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Color(0xFF5B4FFF).withOpacity(0.1),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Row(
+                children: [
+                  Icon(Icons.phone_android, color: Color(0xFF5B4FFF)),
+                  SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      'Download the Android/iOS app for full functionality.',
+                      style: TextStyle(color: Color(0xFF5B4FFF), fontSize: 13),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text('Got it', style: TextStyle(color: Color(0xFF5B4FFF))),
+          ),
+        ],
+      ),
+    );
   }
 
   void _showSnackBar(String message, {bool isError = false}) {
