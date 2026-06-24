@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tflite_v2/tflite_v2.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import 'dart:io' if (dart.library.html) 'dart:html';
+import 'dart:io';
 
 void main() {
   runApp(const SmartAgriApp());
